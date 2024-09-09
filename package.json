@@ -14,7 +14,8 @@
 		"format:check": "prettier --check \"src/**/*.ts\"",
 		"lint": "eslint \"src/**/*.ts\"",
 		"lint:fix": "eslint \"src/**/*.ts\" --fix",
-		"prepare": "husky"
+		"prepare": "husky",
+		"lint-staged": "lint-staged"
 	},
 	"dependencies": {
 		"@nestjs/common": "^10.4.1",
@@ -39,5 +40,11 @@
 		"ts-node": "^10.9.2",
 		"typescript": "^5.5.4",
 		"typescript-eslint": "^8.4.0"
+	},
+	"lint-staged": {
+		"*.{ts}": [
+			"prettier --write",
+			"eslint --fix"
+		]
 	}
 }
