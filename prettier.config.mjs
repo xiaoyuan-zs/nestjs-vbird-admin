@@ -3,7 +3,7 @@ export default {
 	// 缩进
 	useTabs: true, // 缩进方式
 	// 语句结尾是否加分号
-	semi: true,
+	semi: false,
 	// 单引号
 	singleQuote: true,
 	// 换行长度
@@ -17,5 +17,5 @@ export default {
 	// 多行时,最后一行是否需要尾随逗号 可选值"<none|es5|all>"
 	trailingComma: 'none',
 	// 将 > 多行元素放在最后一行的末尾，而不是单独放在下一行 (true：放末尾，false：单独一行)
-	bracketSameLine: true,
-};
+	bracketSameLine: true
+}

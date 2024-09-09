@@ -11,6 +11,7 @@
 		"start:debug": "nest start --debug --watch",
 		"start:prod": "node dist/main",
 		"format": "prettier --write \"src/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\"",
 		"lint": "eslint \"src/**/*.ts\"",
 		"lint:fix": "eslint \"src/**/*.ts\" --fix"
 	},
@@ -28,6 +29,7 @@
 		"@nestjs/schematics": "^10.1.4",
 		"@stylistic/eslint-plugin": "^2.7.2",
 		"eslint": "^9.10.0",
+		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-prettier": "^5.2.1",
 		"globals": "^15.9.0",
 		"prettier": "^3.3.3",

@@ -1,5 +1,15 @@
 {
   "eslint.validate": [
     "typescript"
-  ]
+  ],
+  // 默认的代码格式化工具
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // 保存时自动格式化
+  "editor.formatOnSave": true,
+  // 开启eslint自动修复
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  // 需要Prettier的配置文件
+  "prettier.requireConfig": true
 }
