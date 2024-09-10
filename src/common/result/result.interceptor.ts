@@ -2,6 +2,9 @@ import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nes
 import { map, Observable } from 'rxjs'
 import { Result } from './result'
 
+/**
+ * 拦截器，处理请求结果，将请求结果包装成 Result 类型返回 （需要在 main.ts 中注册）
+ */
 @Injectable()
 export class ResultInterceptor implements NestInterceptor {
 	intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
