@@ -1,9 +1,18 @@
 import { Injectable } from '@nestjs/common'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
+import { InjectRepository } from '@nestjs/typeorm'
+import { User } from './entities/user.entity'
+import { Repository } from 'typeorm'
 
 @Injectable()
 export class UserService {
+	constructor(
+		// 使用 @InjectRepository() 装饰器将 UserRepository 注入到 UserService 中， 相当于Java中的 Mapper
+		@InjectRepository(User)
+		private readonly userRepository: Repository<User>
+	) {}
+
 	create(createUserDto: CreateUserDto) {
 		return 'This action adds a new user'
 	}
