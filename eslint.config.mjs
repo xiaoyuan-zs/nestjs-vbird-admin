@@ -32,6 +32,24 @@ export default [
 		}
 	},
 
+	/**
+	 * typescript 规则
+	 */
+	{
+		files: ['**/*.{ts,,mts,cts,tsx}'],
+		languageOptions: {
+			parser: tsEslint.parser,
+			parserOptions: {
+				project: 'tsconfig.json',
+				sourceType: 'module'
+			}
+		},
+		// 自定义typescript规则， 会覆盖上面的默认规则
+		rules: {
+			'@typescript-eslint/no-explicit-any': 'off'
+		}
+	},
+
 	// 启用浏览器全局变量
 	{
 		languageOptions: {
@@ -46,26 +64,9 @@ export default [
 		}
 	},
 
-	/**
-	 * typescript 规则
-	 */
-	{
-		files: ['**/*.{ts}'],
-		languageOptions: {
-			parser: tsEslint.parser,
-			parserOptions: {
-				project: 'tsconfig.json',
-				sourceType: 'module'
-			}
-		},
-		// 自定义typescript规则， 会覆盖上面的默认规则
-		rules: {}
-	},
-
 	// 以下在不同项目中可以定制不同规则集
 	// React 规则集
 	// Vue 规则集
-	// TSX 规则集
 
 	/**
 	 * prettier 配置，将其放到数组的最后一项，以便 eslint-config-prettier 有机会覆盖其他配置

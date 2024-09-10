@@ -8,8 +8,8 @@ import databaseConfig from './config/database.config'
 
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
 
-import { LoginModule } from './login/login.module'
-import { UserModule } from './user/user.module'
+import { LoginModule } from './system/login/login.module'
+import { UserModule } from './system/user/user.module'
 
 @Module({
 	controllers: [AppController],
