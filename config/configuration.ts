@@ -13,6 +13,4 @@ const defaultConfig = yaml.load(readFileSync(filePath, 'utf8'))
 const envConfig = yaml.load(readFileSync(envFilePath, 'utf8'))
 
 // 合并配置
-export default () => {
-	return Object.assign(defaultConfig, envConfig)
-}
+export default () => Object.assign(defaultConfig, envConfig)

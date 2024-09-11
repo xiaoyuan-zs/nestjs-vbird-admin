@@ -1,5 +1,4 @@
 app:
-  host: 'localhost'
   port: 3000
 
 database:
@@ -7,8 +6,8 @@ database:
   host: localhost
   port: 3306
   username: root
-  password: 123456
-  database: nestjs-vbird-admin
+  password: '123456'
+  database: nestjs_vbird_admin
   retryAttempts: 10
   retryDelay: 500
   autoLoadEntities: true

@@ -4,12 +4,12 @@ import { AppService } from './app.service'
 // 加载参数配置模块
 import { ConfigModule, ConfigService } from '@nestjs/config'
 // 数据库配置
-import databaseConfig from './config/configuration'
+import databaseConfig from '../config/configuration'
 
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
 
-import { LoginModule } from './system/login/login.module'
-import { UserModule } from './system/user/user.module'
+import { LoginModule } from './login/login.module'
+import { UserModule } from './user/user.module'
 
 @Module({
 	controllers: [AppController],
