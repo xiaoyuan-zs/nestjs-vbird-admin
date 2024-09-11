@@ -1,0 +1,15 @@
+app:
+  host: 'localhost'
+  port: 3000
+
+database:
+  type: mysql
+  host: localhost
+  port: 3306
+  username: root
+  password: 123456
+  database: nestjs-vbird-admin
+  retryAttempts: 10
+  retryDelay: 500
+  autoLoadEntities: true
+  synchronize: true

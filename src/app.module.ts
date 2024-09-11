@@ -4,7 +4,7 @@ import { AppService } from './app.service'
 // 加载参数配置模块
 import { ConfigModule, ConfigService } from '@nestjs/config'
 // 数据库配置
-import databaseConfig from './config/database.config'
+import databaseConfig from './config/configuration'
 
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
 
@@ -18,8 +18,8 @@ import { UserModule } from './system/user/user.module'
 		// 将ConfigModule导入根 AppModule 并使用 .forRoot() 静态方法控制其行为
 		// 将从默认位置（项目根目录）加载和解析 .env 文件
 		ConfigModule.forRoot({
-			load: [databaseConfig],
-			isGlobal: true // 全局注册，其他模块也可以使用该配置
+			isGlobal: true, // 全局注册，其他模块也可以使用该配置
+			load: [databaseConfig]
 		}),
 		// 初始化数据库
 		TypeOrmModule.forRootAsync({
