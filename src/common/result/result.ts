@@ -14,7 +14,7 @@ export class Result {
 		this.data = data
 	}
 
-	static success(data: any): Result {
+	static success(data?: any): Result {
 		return new Result(HttpStatus.OK, 'ok', data)
 	}
 

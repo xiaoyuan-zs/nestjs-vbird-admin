@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { User } from './entities/user.entity'
 import { Repository } from 'typeorm'
+import { Result } from 'src/common/result/result'
 
 @Injectable()
 export class UserService {
@@ -14,7 +15,8 @@ export class UserService {
 	) {}
 
 	create(createUserDto: CreateUserDto) {
-		return this.userRepository.save(createUserDto)
+		this.userRepository.save(createUserDto)
+		return Result.success()
 	}
 
 	findAll() {

@@ -14,13 +14,13 @@ export class User {
 	@Column()
 	password: string
 
-	@Column()
+	@Column({ default: '' })
 	email: string
 
-	@Column()
+	@Column({ default: '' })
 	avatar: string
 
-	@Column()
+	@Column({ default: '' })
 	phoneNumber: string
 
 	@Column({ default: 'admin' })
