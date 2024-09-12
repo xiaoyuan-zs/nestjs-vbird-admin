@@ -5,6 +5,7 @@ import { ResultInterceptor } from './common/result/result.interceptor'
 import { HttpExceptionFilter } from './common/exception/exception.filter'
 import { ValidationPipe } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
+import helmet from 'helmet'
 
 async function bootstrap() {
 	const app = await NestFactory.create<NestExpressApplication>(AppModule)
@@ -13,17 +14,16 @@ async function bootstrap() {
 	const configService = app.get(ConfigService)
 	const port = configService.get<string>('app.port')
 
+	// 中间件
+	app.use(helmet())
+
+	// 全局配置
 	app.useGlobalFilters(new HttpExceptionFilter())
 	app.useGlobalInterceptors(new ResultInterceptor())
 	// 使用nestjs自带的验证管道 （校验 DTO 传递的参数）
 	app.useGlobalPipes(
 		new ValidationPipe({
-			transform: true,
-			// 自动删除验证类中没有任何装饰器的属性
-			whitelist: true,
-			validationError: {
-				target: true
-			}
+			transform: true
 		})
 	)
 
