@@ -1,14 +1,16 @@
 app:
+  prefix: '/prod-api'
   port: 3000
 
-database:
-  type: mysql
-  host: localhost
-  port: 3306
-  username: root
-  password: '123456'
-  database: nestjs_vbird_admin
-  retryAttempts: 10
-  retryDelay: 500
-  autoLoadEntities: true
-  synchronize: true
+db:
+  mysql:
+    type: mysql
+    host: localhost
+    port: 3306
+    username: root
+    password: '123456'
+    database: nestjs_vbird_admin
+    retryAttempts: 10
+    retryDelay: 500
+    autoLoadEntities: true
+    synchronize: true

@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { User } from './entities/user.entity'
 import { Repository } from 'typeorm'
 import { ConfigService } from '@nestjs/config'
-import * as bcrypt from 'bcrypt'
+import * as bcrypt from 'bcryptjs'
 
 @Injectable()
 export class UserService {
@@ -16,10 +16,14 @@ export class UserService {
 		private readonly configService: ConfigService
 	) {}
 
+	/**
+	 * 创建用户
+	 * @param createUserDto
+	 */
 	async create(createUserDto: CreateUserDto) {
 		const password = createUserDto.password
 		// 生成加密盐
-		const salt = await bcrypt.genSalt()
+		const salt = await bcrypt.genSalt(10)
 		// 进行加密
 		const hash = await bcrypt.hash(password, salt)
 		createUserDto.password = hash
@@ -30,6 +34,11 @@ export class UserService {
 		return this.userRepository.find()
 	}
 
+	/**
+	 * 根据用户名查询用户
+	 * @param username 用户名
+	 * @returns
+	 */
 	async findUserByUsername(username: string) {
 		return this.userRepository.findOne({
 			where: {

@@ -11,8 +11,9 @@ async function bootstrap() {
 	const app = await NestFactory.create<NestExpressApplication>(AppModule)
 
 	// 获取配置服务
-	const configService = app.get(ConfigService)
-	const port = configService.get<string>('app.port')
+	const config = app.get(ConfigService)
+	// 设置 api 前缀
+	app.setGlobalPrefix(config.get<string>('app.prefix'))
 
 	// 中间件
 	app.use(helmet())
@@ -27,6 +28,6 @@ async function bootstrap() {
 		})
 	)
 
-	await app.listen(port)
+	await app.listen(config.get<string>('app.port'))
 }
 bootstrap()

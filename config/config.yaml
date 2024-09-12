@@ -2,5 +2,6 @@ app:
   port: 3000
 
 jwt:
-  secret: nestjs-vbird-admin-secret
+  secretKey: 'nestjs-vbird-admin-secret'
   expiresIn: 3600
+  refreshIn: 7200

@@ -19,7 +19,8 @@ import { UserModule } from './user/user.module'
 		// 将从默认位置（项目根目录）加载和解析 .env 文件
 		ConfigModule.forRoot({
 			isGlobal: true, // 全局注册，其他模块也可以使用该配置
-			load: [databaseConfig]
+			load: [databaseConfig],
+			cache: true // 缓存配置，默认 false
 		}),
 		// 初始化数据库
 		TypeOrmModule.forRootAsync({
@@ -28,7 +29,7 @@ import { UserModule } from './user/user.module'
 			inject: [ConfigService],
 			useFactory: (config: ConfigService) =>
 				({
-					...config.get('database')
+					...config.get('db.mysql')
 				}) as TypeOrmModuleOptions
 		}),
 		LoginModule,
