@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
 		// 获取token
 		const token = this.extractTokenFormHeader(request)
 		if (!token) {
-			throw new UnauthorizedException('token is not found')
+			throw new UnauthorizedException('token失效或不存在')
 		}
 		this.loginService.verifyToken(token)
 		return true

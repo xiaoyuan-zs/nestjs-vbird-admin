@@ -1,10 +1,11 @@
-import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common'
+import { HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common'
 import { CreateLoginDto } from './dto/create-login.dto'
 import { UserService } from 'src/user/user.service'
 import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcryptjs'
 import { ConfigService } from '@nestjs/config'
 import { CreateTokenDto } from './dto/create-token.dto'
+import { Result } from 'src/common/result/result'
 
 @Injectable()
 export class LoginService {
@@ -18,16 +19,27 @@ export class LoginService {
 	async login(createLoginDto: CreateLoginDto) {
 		const { username, password } = createLoginDto
 		const user = await this.userService.findUserByUsername(username)
+		console.log(111, user)
 		if (!user) {
-			throw new UnauthorizedException()
+			return Result.error(HttpStatus.UNAUTHORIZED, '用户不存在，请重新登录')
 		}
 		// 对比密码
 		const isAuthenticated = await bcrypt.compare(password, user.password)
 		if (!isAuthenticated) {
-			throw new HttpException('登录失败，密码错误', HttpStatus.UNAUTHORIZED)
+			return Result.error(HttpStatus.UNAUTHORIZED, '登录失败，密码错误')
 		}
 		const data = this.getToken({ id: user.userId + '' })
-		return data
+		return Result.success(data)
+	}
+
+	refreshToken(refreshToken: string) {
+		// TODO后续加入 redis 进行验证
+		try {
+			const id = this.jwtService.verify<{ id: string }>(refreshToken)?.id
+			return Result.success(this.getToken({ id }))
+		} catch (error) {
+			throw new UnauthorizedException(error.message)
+		}
 	}
 
 	/**
