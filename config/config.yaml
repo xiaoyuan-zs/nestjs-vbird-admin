@@ -3,5 +3,5 @@ app:
 
 jwt:
   secretKey: 'nestjs-vbird-admin-secret'
-  expiresIn: 3600
-  refreshIn: 7200
+  expiresIn: 60
+  refreshIn: 120

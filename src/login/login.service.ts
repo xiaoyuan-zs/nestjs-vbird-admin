@@ -26,7 +26,6 @@ export class LoginService {
 		if (!isAuthenticated) {
 			throw new HttpException('登录失败，密码错误', HttpStatus.UNAUTHORIZED)
 		}
-		// TODO: Generate a JWT and return it here
 		const data = this.getToken({ id: user.userId + '' })
 		return data
 	}
@@ -46,26 +45,15 @@ export class LoginService {
 	}
 
 	/**
-	 * accessToken 失效后，生成新的 accessToken
-	 * @param id
-	 * @returns
-	 */
-	getNewAccessToken(id: string): string {
-		return this.jwtService.sign({ id })
-	}
-
-	/**
 	 * 校验token
 	 * @param token
 	 * @returns
 	 */
-	verifyToken(token: string): string {
+	verifyToken(token: string): any {
 		try {
-			if (!token) return null
-			const id = this.jwtService.verify(token.replace('Bearer ', ''))
-			return id
-		} catch (e) {
-			return e
+			return this.jwtService.verify<{ id: string }>(token.replace('Bearer ', ''))?.id
+		} catch (error) {
+			throw new UnauthorizedException(error.message)
 		}
 	}
 }

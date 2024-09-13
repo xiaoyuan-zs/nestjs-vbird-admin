@@ -11,9 +11,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 		UserModule,
 		// 使用 registerAsync 方法注册 JWT 模块
 		JwtModule.registerAsync({
+			// 必须写在外面才能生效
+			global: true,
 			imports: [ConfigModule],
 			useFactory: async (config: ConfigService) => ({
-				global: true,
 				secret: config.get('jwt.secretKey'),
 				signOptions: {
 					expiresIn: config.get('jwt.expiresIn')

@@ -11,14 +11,24 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
 import { LoginModule } from './login/login.module'
 import { UserModule } from './user/user.module'
 
+import { AuthGuard } from 'src/auth/auth.guard'
+import { APP_GUARD } from '@nestjs/core'
+
 @Module({
 	controllers: [AppController],
-	providers: [AppService],
+	providers: [
+		AppService,
+		// 全局注册 AuthGuard
+		{
+			provide: APP_GUARD,
+			useClass: AuthGuard
+		}
+	],
 	imports: [
 		// 将ConfigModule导入根 AppModule 并使用 .forRoot() 静态方法控制其行为
 		// 将从默认位置（项目根目录）加载和解析 .env 文件
 		ConfigModule.forRoot({
-			isGlobal: true, // 全局注册，其他模块也可以使用该配置
+			isGlobal: true, // 全局注册，其他模块不需要在Module中导入也可以使用该配置
 			load: [databaseConfig],
 			cache: true // 缓存配置，默认 false
 		}),
