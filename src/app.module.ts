@@ -13,6 +13,8 @@ import { UserModule } from './user/user.module'
 
 import { AuthGuard } from 'src/auth/auth.guard'
 import { APP_GUARD } from '@nestjs/core'
+import { RoleModule } from './role/role.module'
+import { MenuModule } from './menu/menu.module'
 
 @Module({
 	controllers: [AppController],
@@ -43,7 +45,9 @@ import { APP_GUARD } from '@nestjs/core'
 				}) as TypeOrmModuleOptions
 		}),
 		LoginModule,
-		UserModule
+		UserModule,
+		RoleModule,
+		MenuModule
 	]
 })
 export class AppModule {}

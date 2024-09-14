@@ -4,13 +4,14 @@ app:
 
 db:
   mysql:
-    type: mysql
-    host: localhost
+    type: 'mysql'
+    host: 'localhost'
     port: 3306
-    username: root
+    username: 'root'
     password: '123456'
-    database: nestjs_vbird_admin
+    database: 'nestjs_vbird_admin'
     retryAttempts: 10
+    logging: true
     retryDelay: 500
     autoLoadEntities: true
     synchronize: true
