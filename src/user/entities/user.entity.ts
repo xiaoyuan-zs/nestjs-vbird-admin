@@ -21,10 +21,10 @@ export class User {
 	@Column({ default: '' })
 	avatar: string
 
-	@Column({ name: 'phone_number', default: '' })
-	phoneNumber: string
+	@Column({ name: 'mobile_phone', default: '' })
+	mobilePhone: string
 
-	@Column({ name: 'user_order' })
+	@Column({ name: 'user_order', default: 0 })
 	userOrder: number
 
 	@Column({ default: 0 })

@@ -1,9 +1,9 @@
 import { HttpStatus, Injectable } from '@nestjs/common'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
-import { InjectRepository } from '@nestjs/typeorm'
+import { InjectEntityManager, InjectRepository } from '@nestjs/typeorm'
 import { User } from './entities/user.entity'
-import { Repository } from 'typeorm'
+import { EntityManager, Repository } from 'typeorm'
 import { ConfigService } from '@nestjs/config'
 import * as bcrypt from 'bcryptjs'
 import { Result } from 'src/common/result/result'
@@ -14,7 +14,10 @@ export class UserService {
 		// 使用 @InjectRepository() 装饰器将 UserRepository 注入到 UserService 中， 相当于Java中的 Mapper
 		@InjectRepository(User)
 		private readonly userRepository: Repository<User>,
-		private readonly configService: ConfigService
+		private readonly configService: ConfigService,
+
+		@InjectEntityManager()
+		private readonly entityManager: EntityManager
 	) {}
 
 	/**
@@ -48,6 +51,29 @@ export class UserService {
 	 */
 	async findUserByUsername(username: string) {
 		return await this.userRepository.findOneBy({ username })
+	}
+
+	initData() {
+		const user = new User()
+		user.username = 'admin'
+		user.nickname = 'admin'
+		user.password = 'admin123'
+		user.email = '13333333333@qq.com'
+		user.mobilePhone = '13333333333'
+
+		const user1 = new User()
+		user1.username = 'common'
+		user1.nickname = 'common'
+		user1.password = 'admin123'
+		user1.email = '13333333334@qq.com'
+		user1.mobilePhone = '13333333334'
+
+		const user2 = new User()
+		user2.username = 'simple'
+		user2.nickname = 'simple'
+		user2.password = 'admin123'
+		user2.email = '13333333335@qq.com'
+		user2.mobilePhone = '13333333335'
 	}
 
 	findOne(id: number) {
