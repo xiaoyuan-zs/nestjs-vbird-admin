@@ -7,6 +7,8 @@ import { EntityManager, Repository } from 'typeorm'
 import { ConfigService } from '@nestjs/config'
 import * as bcrypt from 'bcryptjs'
 import { Result } from 'src/common/result/result'
+import { Role } from 'src/role/entities/role.entity'
+import { Menu } from 'src/menu/entities/menu.entity'
 
 @Injectable()
 export class UserService {
@@ -74,6 +76,18 @@ export class UserService {
 		user2.password = 'admin123'
 		user2.email = '13333333335@qq.com'
 		user2.mobilePhone = '13333333335'
+
+		const role = new Role()
+		role.roleName = 'admin'
+		role.roleKey = 'admin'
+		role.remark = '管理员'
+
+		const role1 = new Role()
+		role1.roleName = 'common'
+		role1.roleKey = 'common'
+		role1.remark = '普通用户'
+
+		const menu = new Menu()
 	}
 
 	findOne(id: number) {

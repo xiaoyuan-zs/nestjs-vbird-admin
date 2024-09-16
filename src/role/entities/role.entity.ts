@@ -12,7 +12,7 @@ export class Role {
 	@Column({ name: 'role_key' })
 	roleKey: string
 
-	@Column({ name: 'role_sort' })
+	@Column({ name: 'role_sort', default: 0 })
 	roleOrder: number
 
 	@Column({ default: 0 })
