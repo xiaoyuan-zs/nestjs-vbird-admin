@@ -8,8 +8,8 @@ export class Menu {
 	@Column({ name: 'menu_name' })
 	menuName: string
 
-	@Column({ name: 'parent_id' })
-	parentId: string
+	@Column({ name: 'parent_id', default: 0 })
+	parentId: number
 
 	@Column({ name: 'menu_order' })
 	menuOrder: number

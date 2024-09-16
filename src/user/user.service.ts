@@ -91,6 +91,7 @@ export class UserService {
 		menu.menuName = '系统管理'
 		menu.path = 'system'
 		menu.component = 'Layout'
+		menu.menuType = 'C'
 	}
 
 	findOne(id: number) {
