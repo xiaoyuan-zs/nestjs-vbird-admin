@@ -88,6 +88,7 @@ export class UserService {
 		role1.remark = '普通用户'
 
 		const menu = new Menu()
+		menu.menuName = '系统管理'
 	}
 
 	findOne(id: number) {
