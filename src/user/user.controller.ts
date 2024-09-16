@@ -17,6 +17,11 @@ export class UserController {
 		return this.userService.findAll()
 	}
 
+	@Get('initData')
+	initData() {
+		return this.userService.initData()
+	}
+
 	@Get(':id')
 	findOne(@Param('id') id: string) {
 		return this.userService.findOne(+id)

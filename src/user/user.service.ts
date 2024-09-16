@@ -43,6 +43,7 @@ export class UserService {
 	}
 
 	async findAll() {
+		// this.initData()
 		return await this.userRepository.find()
 	}
 
@@ -55,7 +56,19 @@ export class UserService {
 		return await this.userRepository.findOneBy({ username })
 	}
 
-	initData() {
+	findOne(id: number) {
+		return `This action returns a #${id} user`
+	}
+
+	update(id: number, updateUserDto: UpdateUserDto) {
+		return `This action updates a #${id} user`
+	}
+
+	remove(id: number) {
+		return `This action removes a #${id} user`
+	}
+
+	async initData() {
 		const user = new User()
 		user.username = 'admin'
 		user.nickname = 'admin'
@@ -87,6 +100,11 @@ export class UserService {
 		role1.roleKey = 'common'
 		role1.remark = '普通用户'
 
+		const role2 = new Role()
+		role2.roleName = 'simple'
+		role2.roleKey = 'simple'
+		role2.remark = '简单用户'
+
 		const menu = new Menu()
 		menu.menuName = '系统管理'
 		menu.path = 'system'
@@ -98,17 +116,40 @@ export class UserService {
 		const menu1 = new Menu()
 		menu1.menuName = '用户管理'
 		menu1.path = 'user'
-	}
+		menu1.component = 'system/user/index'
+		menu1.menuType = 'M'
+		menu1.icon = 'xxx'
+		menu1.remark = '用户管理'
 
-	findOne(id: number) {
-		return `This action returns a #${id} user`
-	}
+		const menu2 = new Menu()
+		menu2.menuName = '角色管理'
+		menu2.path = 'role'
+		menu2.component = 'system/role/index'
+		menu2.menuType = 'M'
+		menu2.icon = 'xxx'
+		menu2.remark = '角色管理'
 
-	update(id: number, updateUserDto: UpdateUserDto) {
-		return `This action updates a #${id} user`
-	}
+		const menu3 = new Menu()
+		menu3.menuName = '菜单管理'
+		menu3.path = 'menu'
+		menu3.component = 'system/menu/index'
+		menu3.menuType = 'M'
+		menu3.icon = 'xxx'
+		menu3.remark = '菜单管理'
 
-	remove(id: number) {
-		return `This action removes a #${id} user`
+		// 添加 role 和 menu 关系
+		role.menus = [menu, menu1, menu2, menu3]
+		role1.menus = [menu, menu1, menu2]
+		role2.menus = [menu, menu1]
+
+		// 添加 user 和 role 关系
+		user.roles = [role]
+		user1.roles = [role1]
+		user2.roles = [role2]
+
+		// 保存数据
+		await this.entityManager.save(Menu, [menu, menu1, menu2, menu3])
+		await this.entityManager.save(Role, [role, role1, role2])
+		await this.entityManager.save(User, [user, user1, user2])
 	}
 }

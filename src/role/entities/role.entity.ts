@@ -18,7 +18,7 @@ export class Role {
 	@Column({ default: 0 })
 	status: number
 
-	@Column()
+	@Column({ default: '' })
 	remark: string
 
 	@Column({ name: 'create_by', default: 'admin' })

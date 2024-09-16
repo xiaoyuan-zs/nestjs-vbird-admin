@@ -11,7 +11,7 @@ export class Menu {
 	@Column({ name: 'parent_id', default: 0 })
 	parentId: number
 
-	@Column({ name: 'menu_order' })
+	@Column({ name: 'menu_order', default: 0 })
 	menuOrder: number
 
 	@Column()
@@ -23,10 +23,10 @@ export class Menu {
 	@Column({ name: 'menu_type', default: 'C' })
 	menuType: string
 
-	@Column()
+	@Column({ name: 'permissions', default: '' })
 	permissions: string
 
-	@Column()
+	@Column({ default: '' })
 	icon: string
 
 	@Column({ default: 0 })
@@ -35,7 +35,7 @@ export class Menu {
 	@Column({ default: 0 })
 	visible: number
 
-	@Column()
+	@Column({ default: '' })
 	remark: string
 
 	@Column({ name: 'create_by', default: 'admin' })
