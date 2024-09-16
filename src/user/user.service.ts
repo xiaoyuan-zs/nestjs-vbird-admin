@@ -42,9 +42,15 @@ export class UserService {
 		return Result.success()
 	}
 
+	/**
+	 * 查询用户列表
+	 * @returns
+	 */
 	async findAll() {
 		// this.initData()
-		return await this.userRepository.find()
+		return this.userRepository.find({
+			select: ['userId', 'username', 'nickname', 'email', 'mobilePhone', 'avatar', 'remark', 'status', 'createTime', 'updateTime']
+		})
 	}
 
 	/**
@@ -56,16 +62,26 @@ export class UserService {
 		return await this.userRepository.findOneBy({ username })
 	}
 
+	/**
+	 * 根据用户 id 查询用户信息
+	 * @param id
+	 * @returns
+	 */
 	findOne(id: number) {
-		return `This action returns a #${id} user`
+		return this.userRepository.find({
+			where: {
+				userId: id
+			},
+			select: ['userId', 'username', 'nickname', 'email', 'mobilePhone', 'avatar', 'remark', 'createTime', 'updateTime']
+		})
 	}
 
-	update(id: number, updateUserDto: UpdateUserDto) {
-		return `This action updates a #${id} user`
+	update(updateUserDto: UpdateUserDto) {
+		return 0
 	}
 
 	remove(id: number) {
-		return `This action removes a #${id} user`
+		return this.userRepository.delete(id)
 	}
 
 	async initData() {

@@ -19,7 +19,6 @@ export class LoginService {
 	async login(createLoginDto: CreateLoginDto) {
 		const { username, password } = createLoginDto
 		const user = await this.userService.findUserByUsername(username)
-		console.log(111, user)
 		if (!user) {
 			return Result.error(HttpStatus.UNAUTHORIZED, '用户不存在，请重新登录')
 		}
