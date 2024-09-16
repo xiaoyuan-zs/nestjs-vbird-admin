@@ -93,6 +93,11 @@ export class UserService {
 		menu.component = 'Layout'
 		menu.menuType = 'C'
 		menu.icon = 'xxx'
+		menu.remark = '系统管理'
+
+		const menu1 = new Menu()
+		menu1.menuName = '用户管理'
+		menu1.path = 'user'
 	}
 
 	findOne(id: number) {
