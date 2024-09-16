@@ -89,6 +89,8 @@ export class UserService {
 
 		const menu = new Menu()
 		menu.menuName = '系统管理'
+		menu.path = 'system'
+		menu.component = 'Layout'
 	}
 
 	findOne(id: number) {
