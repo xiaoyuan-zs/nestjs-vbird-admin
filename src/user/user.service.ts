@@ -72,7 +72,8 @@ export class UserService {
 			where: {
 				userId: id
 			},
-			select: ['userId', 'username', 'nickname', 'email', 'mobilePhone', 'avatar', 'remark', 'createTime', 'updateTime']
+			select: ['userId', 'username', 'nickname', 'email', 'mobilePhone', 'avatar', 'remark', 'createTime', 'updateTime'],
+			relations: ['roles', 'roles.menus']
 		})
 	}
 
