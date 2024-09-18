@@ -15,6 +15,8 @@ import { AuthGuard } from 'src/auth/auth.guard'
 import { APP_GUARD } from '@nestjs/core'
 import { RoleModule } from './role/role.module'
 import { MenuModule } from './menu/menu.module'
+import { PermissionsGuard } from './auth/permission.guard'
+import { RolesGuard } from './auth/roles.guard'
 
 @Module({
 	controllers: [AppController],
@@ -24,6 +26,14 @@ import { MenuModule } from './menu/menu.module'
 		{
 			provide: APP_GUARD,
 			useClass: AuthGuard
+		},
+		{
+			provide: APP_GUARD,
+			useClass: PermissionsGuard
+		},
+		{
+			provide: APP_GUARD,
+			useClass: RolesGuard
 		}
 	],
 	imports: [
