@@ -73,7 +73,7 @@ export class UserService {
 				userId: id
 			},
 			select: ['userId', 'username', 'nickname', 'email', 'mobilePhone', 'avatar', 'remark', 'createTime', 'updateTime'],
-			relations: ['roles', 'roles.menus']
+			relations: ['roles']
 		})
 	}
 
